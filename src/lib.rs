@@ -27,7 +27,7 @@ pub use inventory::submit;
 
 pub mod prelude {
     pub use super::{RegistrationPlugin, app};
-    pub use procedural_macros::init;
+    pub use bevy_registration_procedural_macros::init;
 }
 
 /// Iterates through the collected [app functions](AppFunction) and runs each of them.

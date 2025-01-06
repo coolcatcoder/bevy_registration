@@ -1,0 +1,15 @@
+[package]
+name = "bevy_registration_procedural_macros"
+edition = "2024"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+description = "Run code on the app from far away. Only the procedural macros are in this crate."
+repository = "https://github.com/coolcatcoder/bevy_registration"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = "2.0.77"
+quote = "1.0.37"
+proc-macro2 = "1.0.86"

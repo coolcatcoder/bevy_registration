@@ -10,9 +10,9 @@ keywords = ["bevy", "inventory", "registration"]
 categories = ["game-development"]
 
 [workspace]
-members = ["procedural_macros"]
+members = ["bevy_registration_procedural_macros"]
 
 [dependencies]
-procedural_macros = {path="procedural_macros", version = "0.1.0"}
+bevy_registration_procedural_macros = {path="bevy_registration_procedural_macros", version = "0.1.0"}
 bevy = { version = "0.15.1", default-features = false }
 inventory = "0.3.16"
