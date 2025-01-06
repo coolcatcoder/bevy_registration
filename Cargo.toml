@@ -3,11 +3,16 @@ name = "bevy_registration"
 version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
+description = "Run code on the app from far away."
+repository = "https://github.com/coolcatcoder/bevy_registration"
+readme = "README.md"
+keywords = ["bevy", "inventory", "registration"]
+categories = ["game-development"]
 
 [workspace]
 members = ["procedural_macros"]
 
 [dependencies]
-procedural_macros = {path="procedural_macros"}
+procedural_macros = {path="procedural_macros", version = "0.1.0"}
 bevy = { version = "0.15.1", default-features = false }
 inventory = "0.3.16"

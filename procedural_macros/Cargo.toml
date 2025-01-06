@@ -1,6 +1,9 @@
 [package]
 name = "procedural_macros"
 edition = "2024"
+# I do not know why we need 2 versions. Why would they ever be different?
+# Doesn't work without this version though. Weird.
+version = "0.1.0"
 
 [lib]
 proc-macro = true
