@@ -1,5 +1,28 @@
+//! # Bevy Registration
+//! A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
+//! ## Example:
+//! ```rs
+//! use bevy::{app::{App, Startup}, prelude::{Res, Resource}};
+//! 
+//! // Initiates the resource on the app.
+//! // This does not need to be in the same module as the app. It can be anywhere.
+//! #[init]
+//! #[derive(Resource, Default)]
+//! pub struct TestResource;
+//! 
+//! fn main() {
+//!   App::new()
+//!     // Add the registration plugin that will collect the far-away app code.
+//!     .add_plugins(RegistrationPlugin)
+//!     // This will not panic.
+//!     .add_systems(Startup, |resource: Option<Res<TestResource>>|{resource.unwrap();})        
+//!     .run();
+//! }
+//! ```
+
 use bevy::app::{App, Plugin};
 use inventory::collect;
+#[doc(hidden)]
 pub use inventory::submit;
 
 pub mod prelude {
@@ -22,6 +45,7 @@ impl Plugin for RegistrationPlugin {
 
 /// A function that gets run on the app.
 /// While you can use inventory::collect with this struct, you should instead use the convenient [app macro](app).
+#[doc(hidden)]
 pub struct AppFunction(pub fn(&mut App));
 collect!(AppFunction);
 

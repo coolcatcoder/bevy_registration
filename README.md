@@ -1,5 +1,5 @@
 # Bevy Registration
-A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally.
+A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
 ## Useful documentation
 TO DO
 ## Example:
