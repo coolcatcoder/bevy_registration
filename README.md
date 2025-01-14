@@ -1,26 +1,34 @@
 # Bevy Registration
-A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
+Annotate systems, resources, and events with macros and automatically add them to your app.
+This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
 ## Bevy Versions
 | registration version | bevy version |
 | -------------------- | ------------ |
 | 0.1.0 - 0.2.0        | 0.15         |
 ## Example:
 ```rs
-use bevy::{app::{App, Startup}, prelude::{Res, Resource}};
+use bevy::prelude::*;
+use bevy_registration::prelude::*;
 
 // Initiates the resource on the app.
-// This does not need to be in the same module as the app. It can be anywhere.
 #[init]
 #[derive(Resource, Default)]
 pub struct TestResource;
 
-fn main() {
-  App::new()
-    // Add the registration plugin that will collect the far-away app code.
-    .add_plugins(RegistrationPlugin)
+// Adds the system to the Update schedule.
+#[system(Update)]
+fn resource_tester(resource: Option<Res<TestResource>>) {
     // This will not panic.
-    .add_systems(Startup, |resource: Option<Res<TestResource>>|{resource.unwrap();})        
-    .run();
+    resource.unwrap();
+}
+
+fn main() {
+    App::new()
+        // Add bevy's default plugins, to start up the update loop.
+        .add_plugins(DefaultPlugins)
+        // Add the registration plugin that will collect the far-away app code.
+        .add_plugins(RegistrationPlugin)
+        .run();
 }
 ```
 ## License
