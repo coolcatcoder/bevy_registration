@@ -1,6 +1,6 @@
 [package]
 name = "bevy_registration"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Run code on the app from far away."
@@ -13,6 +13,7 @@ categories = ["game-development"]
 members = ["bevy_registration_procedural_macros"]
 
 [dependencies]
-bevy_registration_procedural_macros = {path="bevy_registration_procedural_macros", version = "0.1.0"}
+bevy_registration_procedural_macros = {path="bevy_registration_procedural_macros", version = "0.2.0"}
 bevy = { version = "0.15.1", default-features = false }
-inventory = "0.3.16"
+inventory = "0.3.17"
+paste = "1.0.15"
