@@ -1,7 +1,9 @@
 # Bevy Registration
 A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
-## Useful documentation
-TO DO
+## Bevy Versions
+| registration version | bevy version |
+| -------------------- | ------------ |
+| 0.1.0 - 0.2.0        | 0.15         |
 ## Example:
 ```rs
 use bevy::{app::{App, Startup}, prelude::{Res, Resource}};
