@@ -1,5 +1,6 @@
 //! # Bevy Registration
-//! A way of running code on bevy's app from anywhere. This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
+//! Annotate systems, resources, and events with macros and automatically add them to your app.
+//! This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
 //! ## Example:
 //! ```
 //! use bevy::prelude::*;

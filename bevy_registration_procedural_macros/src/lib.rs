@@ -156,6 +156,7 @@ impl Schedule {
             .collect();
 
         let subschedules_idents = self.subschedules.iter().map(|schedule| &schedule.ident);
+        let subschedules_idents_clone = subschedules_idents.clone();
 
         define_structs.extend(quote! {
             #(
@@ -201,7 +202,11 @@ impl Schedule {
                 app.add_systems(
                     [<#path_quote>],
                     bevy::prelude::IntoSystemConfigs::chain((#(#subschedules_runners),*)),
-                );
+                )
+                #(
+                    .add_schedule(bevy::prelude::Schedule::new([<#path_quote _ #subschedules_idents_clone>]::default()))
+                )*
+                ;
             }
         });
 
@@ -251,7 +256,7 @@ impl Parse for Schedule {
     }
 }
 
-/// Creates a schedule heirarchy.
+/// Creates a schedule hierarchy.
 /// Schedules in the heirarchy may have these attributes:
 /// * `run_every(Duration)` Runs the schedule every time the duration passes. May run the schedule multiple times.
 /// ## Example:
