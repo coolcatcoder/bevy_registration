@@ -80,8 +80,8 @@ macro_rules! app {
     };
 }
 
-/// A system that will run a schedule.
+/// A system that will try to run a schedule.
 /// This is used internally.
-pub fn run_schedule<T: ScheduleLabel + Default>(world: &mut World) {
-    world.run_schedule(T::default());
+pub fn try_run_schedule<T: ScheduleLabel + Default>(world: &mut World) {
+    let _ = world.try_run_schedule(T::default());
 }

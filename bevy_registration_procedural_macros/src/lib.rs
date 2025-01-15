@@ -156,7 +156,6 @@ impl Schedule {
             .collect();
 
         let subschedules_idents = self.subschedules.iter().map(|schedule| &schedule.ident);
-        let subschedules_idents_clone = subschedules_idents.clone();
 
         define_structs.extend(quote! {
             #(
@@ -183,7 +182,7 @@ impl Schedule {
 
                         while *time_passed >= #expr {
                             *time_passed -= #expr;
-                            world.run_schedule([<#path_quote _ #ident>]::default());
+                            let _ = world.try_run_schedule([<#path_quote _ #ident>]::default());
                         }
 
                         world.remove_resource::<bevy::time::Time>().unwrap();
@@ -192,7 +191,7 @@ impl Schedule {
                 }
             } else {
                 quote! {
-                    bevy_registration::run_schedule::<[<#path_quote _ #ident>]>
+                    bevy_registration::try_run_schedule::<[<#path_quote _ #ident>]>
                 }
             }
         });
@@ -202,13 +201,7 @@ impl Schedule {
                 app.add_systems(
                     [<#path_quote>],
                     bevy::prelude::IntoSystemConfigs::chain((#(#subschedules_runners),*)),
-                )
-                #(
-                    //FIXME: add_schedule can overwrite already added systems, so we instead just add an empty system to each schedule, until a better solution is found.
-                    //.add_schedule(bevy::prelude::Schedule::new([<#path_quote _ #subschedules_idents_clone>]::default()))
-                    .add_systems([<#path_quote _ #subschedules_idents_clone>], ||{})
-                )*
-                ;
+                );
             }
         });
 
