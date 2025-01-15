@@ -204,7 +204,9 @@ impl Schedule {
                     bevy::prelude::IntoSystemConfigs::chain((#(#subschedules_runners),*)),
                 )
                 #(
-                    .add_schedule(bevy::prelude::Schedule::new([<#path_quote _ #subschedules_idents_clone>]::default()))
+                    //FIXME: add_schedule can overwrite already added systems, so we instead just add an empty system to each schedule, until a better solution is found.
+                    //.add_schedule(bevy::prelude::Schedule::new([<#path_quote _ #subschedules_idents_clone>]::default()))
+                    .add_systems([<#path_quote _ #subschedules_idents_clone>], ||{})
                 )*
                 ;
             }
