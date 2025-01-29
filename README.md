@@ -4,7 +4,7 @@ This uses [Inventory](https://crates.io/crates/inventory) internally, so it shou
 ## Bevy Versions
 | registration version | bevy version |
 | -------------------- | ------------ |
-| 0.1.0 - 0.2.3        | 0.15         |
+| 0.1.0 - 0.2.4        | 0.15         |
 ## Example:
 ```rs
 use bevy::prelude::*;
