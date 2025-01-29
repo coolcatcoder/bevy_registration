@@ -44,11 +44,24 @@ pub mod prelude {
     pub use bevy_registration_procedural_macros::{init, schedule, system};
 }
 
+#[cfg(target_family = "wasm")]
+unsafe extern "C" {
+    /// This appears to make inventory work when called once.
+    /// Safety requirements unknown.
+    fn __wasm_call_ctors();
+}
+
 /// Iterates through the collected [app functions](AppFunction) and runs each of them.
 pub struct RegistrationPlugin;
 
 impl Plugin for RegistrationPlugin {
     fn build(&self, app: &mut App) {
+        // Safety: Unsafe. I can't find the safety requirements. This is called only once per program, which is good.
+        #[cfg(target_family = "wasm")]
+        unsafe {
+            __wasm_call_ctors();
+        }
+        
         inventory::iter::<AppFunction>
             .into_iter()
             .for_each(|app_function| {
