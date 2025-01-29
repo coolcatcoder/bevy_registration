@@ -1,6 +1,6 @@
 # Bevy Registration
 Annotate systems, resources, and events with macros and automatically add them to your app.
-This uses [Inventory](https://crates.io/crates/inventory) internally, so it may not work on all targets.
+This uses [Inventory](https://crates.io/crates/inventory) internally, so it should work on Linux, macOS, iOS, FreeBSD, Android, Windows, and WebAssembly.
 ## Bevy Versions
 | registration version | bevy version |
 | -------------------- | ------------ |
