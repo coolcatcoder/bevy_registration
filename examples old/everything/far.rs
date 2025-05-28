@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 use bevy::{
     log::info,
     prelude::{Res, Resource},
@@ -30,8 +32,21 @@ fn random() {
     info!("random");
 }
 
+macro_rules! Test {
+    (, $foo:ty>) => {
+        Res<Time>
+    };
+}
+
+pub struct Test<T, A>(PhantomData<(T, A)>);
+
+/// something
+struct Foo;
+
+struct Bloo<'w>(Res<'w, Time>);
+
 #[system(Update::Test)]
-fn fixed_time_step(time: Res<Time>) {
+fn fixed_time_step(time: Test<!, Foo>) {
     info!("Time's delta is {} seconds!", time.delta_secs());
 }
 
